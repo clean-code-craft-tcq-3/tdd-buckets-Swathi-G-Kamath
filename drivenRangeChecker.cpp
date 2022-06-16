@@ -2,7 +2,7 @@
 #include <algorithm> 
 #include <iostream>
 
-bool isValueContinuous(int currentIndex, int nextIndex)
+bool checkForContinuousRange(int currentIndex, int nextIndex)
 {
    if(((nextIndex - currentIndex) == 1) || ((nextIndex - currentIndex) == 0))
    {
