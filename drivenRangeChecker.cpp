@@ -1,48 +1,49 @@
-#include "currentRanges.h"
+#include "currentRanges.hpp"
+#include <algorithm> 
+#include <iostream>
 
-int detectRanges(const float* readings, int totalreadings)
+bool isValueContinuous(int currentIndex, int nextIndex)
 {
-    int totalNumberOfRanges = 0;
-   
-    if((readings != NULL) && (totalreadings > 0))	
-    {	   
-	  float sortedArray[total];
-   	
-  	
-      bubbleSortAscending(readings, totalreadings, sortedArray);
-  
-      float rangeMin = sortedArray[0];
-      float rangeMax = sortedArray[0];
-      int n_inRange = 1;
-	
-      for (int i=0; i < totalreadings;i++)
-      {
-        if(!(i == (totalreadings-1)))
-        {
-            if((sortedArray[i+1] - sortedArray[i])<= 1.0f)
-	        {
-		      n_inRange++;
-		      rangeMax = sortedArray[i+1];
-		      continue;
-	        }    
-        }
-	    else
-	    {
-	        rangeMax = sortedArray[numOfReadings-1];
-	    }
-	      std::cout<<rangemin<<"-"<<rangemax<<n_inRange;
-		printf("%.2f - %.2f , %d\n",rangeMin, rangeMax,n_inRange);
-        totalNumberOfRanges = 1;
-	rangeMin = sortedArray[i+1];
-	rangeMax = sortedArray[i+1];
-	totalNumberOfRanges++;
-      }	
-    }
-    else
-    {
-     std::cout<<"No array input";
-    }
- 
-	return totalNumberOfRanges;
- 
+   if(((nextIndex - currentIndex) == 1) || ((nextIndex - currentIndex) == 0))
+   {
+	   return true;
+   }
+   return false;
+}
+
+void checkForRangeContinuity(std::vector<int> sortedRange, int currentIndex, currentRanges& currentRange)
+{
+	int startIndex = sortedRange[currentIndex];
+   for(int i = currentIndex; index < (sortedRange.size() - 1); index++)
+   {
+	   if(isValueContinuous(sortedRange[index], sortedRange[index + 1]))
+	   {
+		   currentRange.m_totalReadingContinuousRange ++;
+		   currentRange.m_startIndex = startIndex;
+		   currentRange.m_endIndex = sortedRange[index + 1];
+	   }
+	   else
+	   {
+		   break;
+	   }
+   }
+}
+
+std::vector<currentRanges> updateRangeReadings(std::vector<int> currentReadings)
+{
+    int currentIndex = 0;
+	std::vector<currentRanges> currentRangeList;
+	std::sort(currentReadings.begin(), currentReadings.end());
+    while(true == (currentIndex < currentReadings.size()))
+	{
+	   currentRanges currentRanges;
+           checkForRangeContinuity(currentReadings, currentIndex, currentRanges);
+	   if(currentRanges.m_totalReadingContinuousRange > 1)
+	   {
+		  currentRangeList.push_back(currentRanges);
+	      currentIndex = currentIndex + currentRanges.m_totalReadingContinuousRange - 1;
+	   }
+	   currentIndex++;
+	}
+	return currentRangeList;
 }
