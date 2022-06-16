@@ -30,16 +30,17 @@ int detectRanges(const float* readings, int totalreadings)
 	    {
 	        rangeMax = sortedArray[numOfReadings-1];
 	    }
+	      std::cout<<rangemin<<"-"<<rangemax<<n_inRange;
 		printf("%.2f - %.2f , %d\n",rangeMin, rangeMax,n_inRange);
         totalNumberOfRanges = 1;
-	    rangeMin = sortedArray[i+1];
-		rangeMax = sortedArray[i+1];
-	    totalNumberOfRanges++;
+	rangeMin = sortedArray[i+1];
+	rangeMax = sortedArray[i+1];
+	totalNumberOfRanges++;
       }	
     }
     else
     {
-       printf("NULL array input");
+     std::cout<<"No array input";
     }
  
 	return totalNumberOfRanges;
