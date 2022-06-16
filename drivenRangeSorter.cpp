@@ -1,4 +1,5 @@
 #include "currentRanges.h"
+#include <stdio.h>
 
 void bubbleSortAscending(const float* inputArray, int totalReadings, float* sortedArray)
 {
@@ -31,13 +32,13 @@ void printArray (float *arrayIndex, int arraysize)
 {
 	if (arraysize <= 0)
 	{
-		printf("NULL ARRAY");	
+		std::cout<<"Null Array";
 	}
 	else
 	{
 		for(int i=0; i< arraysize ; i++)
 		{
-			printf("%.2f,", arrayIndex[i]);
+			std::cout<<arrayIndex[i];
 		}
 	}
 }
