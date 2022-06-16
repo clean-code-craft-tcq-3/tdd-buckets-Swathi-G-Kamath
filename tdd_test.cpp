@@ -1,35 +1,26 @@
-#include "currentRanges.h"
-#include <assert.h>
+#include "currentRanges.hpp"
 
-void testTotalRangesWhenEntriesAreNull()
+
+TEST_CASE("Test the continuous ranges in given set of current ranges") 
 {
-    float *arrayOfReadings = NULL;
-    int totalReadings = 0;
-    printArray (arrayOfReadings, totalReadings);
-    assert(detectRanges(arrayOfReadings, totalReadings) == 0);
-}
 
-void testTotalRangesWhenEntriesareMixed()
-{
-    float arrayOfReadings[]={3, 3, 5, 4, 10, 11, 12};
-    int totalReadings = sizeof(arrayOfReadings)/sizeof(arrayOfReadings[0]);
-    printArray (arrayOfReadings, totalReadings);
-    assert(detectRanges(arrayOfReadings, totalReadings) == 2);
-}
+  std::vector<int> currentReadings {1, 2, 4};
+  std::vector<currentRanges> currentRangesList;
+  currentRangesList = CalculateRangeAndReadings(currentReadings);
+  assert(1 == currentRangesList.size());
+  assert(true == currentRangesList.size());
+  REQUIRE(currentRangesList[0].m_totalReadingContinuousRange == 2);
+  REQUIRE(currentRangesList[0].m_startIndex == 1);
+  REQUIRE(currentRangesList[0].m_endIndex == 2);
 
-void testTotalRangesForFloatentries()
-{
-    float arrayOfReadings[]={3.7, 1.2, 2.5, 4.5, 1.1, 11.2, 12.1,10.5,20,20.5};
-    int totalReadings = sizeof(arrayOfReadings)/sizeof(arrayOfReadings[0]);
-    printArray (arrayOfReadings, totalReadings);
-    assert(detectRanges(arrayOfReadings, totalReadings) == 5);
-}
-
-
-int main()
-{
-	testTotalRangesWhenEntriesAreNull();
-	testTotalRangesWhenEntriesareMixed();
-	testTotalRangesForFloatentries();
-	return 0;
+  ::std::vector<int> currentReadings1 {3, 3, 5, 4, 10, 11, 12};
+  std::vector<currentRanges> currentRangesList1;
+  currentRangesList1 = CalculateRangeAndReadings(currentReadings1);
+  assert(2 == currentRangesList1.size());
+  REQUIRE(currentRangesList1[0].m_totalReadingContinuousRange == 4);
+  REQUIRE(currentRangesList1[0].m_startIndex == 3);
+  REQUIRE(currentRangesList1[0].m_endIndex == 5);
+  REQUIRE(currentRangesList1[1].m_totalReadingContinuousRange == 3);
+  REQUIRE(currentRangesList1[1].m_startIndex == 10);
+  REQUIRE(currentRangesList1[1].m_endIndex == 12);
 }
