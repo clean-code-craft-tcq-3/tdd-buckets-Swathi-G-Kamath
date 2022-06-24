@@ -11,7 +11,7 @@ bool checkForContinuousRange(int currentIndex, int nextIndex)
    return false;
 }
 
-void checkForRangeContinuity(std::vector<int> sortedRange, int currentIndex, currentRanges& currentRange)
+void updateIfRangeIsContinuous(std::vector<int> sortedRange, int currentIndex, currentRanges& currentRange)
 {
 	int startIndex = sortedRange[currentIndex];
    for(int i = currentIndex; index < (sortedRange.size() - 1); index++)
@@ -34,7 +34,7 @@ std::vector<currentRanges> updateRangeReadings(std::vector<int> currentReadings)
     int currentIndex = 0;
 	std::vector<currentRanges> currentRangeList;
 	std::sort(currentReadings.begin(), currentReadings.end());
-    while(true == (currentIndex < currentReadings.size()))
+    while(currentIndex < currentReadings.size())
 	{
 	   currentRanges currentRanges;
            checkForRangeContinuity(currentReadings, currentIndex, currentRanges);
